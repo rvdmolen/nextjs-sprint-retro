@@ -1,0 +1,23 @@
+.pageHeader {
+    background: orange;
+    -webkit-box-shadow: 0 5px 45px 0 rgba(50, 50, 50, 0.4);
+    box-shadow: 0 1px 10px 0 rgba(50, 50, 50, 0.4);
+    width: 100%;
+    position: fixed;
+}
+
+.pageHeader nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pageHeader h1 {
+    color: white;
+}
+
+.pageHeader h2 {
+    color: white;
+    font-size: 1.2rem;
+}
