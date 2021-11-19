@@ -2,9 +2,20 @@
     margin: 0;
     line-height: 1.15;
     font-size: 4rem;
+    text-align: center;
 }
 
-.title,
-.description {
-    text-align: center;
+.subtitle {
+    color: gray;
+    font-weight: 200;
+}
+
+.noselect {
+    font-weight: 600;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

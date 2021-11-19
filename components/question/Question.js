@@ -1,49 +1,85 @@
+import React from 'react';
+
 import styles from './Question.module.css';
-import React, { useEffect, useState } from 'react';
+import { questions } from '../../data/questions.js';
 
+const interval = 90;
 
-// class Question extends React.Component {
-//     render() {
-//         return (
-//             <div>
-//                 <h1>Hello, world!</h1>
-//                 <h2>It is {this.props.myprop}</h2>
-//             </div>
-//         );
-//     }
-// }
-let index = 0;
+class Question extends React.Component {
 
-
-const Question = ({onRef, foo}) => {
-
-    const [value, setValue] = useState("value")
-
-    const generateQuestion = () => {
-        console.log('hi');
-        index++;
-    };
-
-    useEffect(() => {
-        //onRef(generateQuestion);
-        console.log('dscdddscs');
-    });
-
-    function clickMe() {
-        index++;
-        setValue(index);
-        console.log('clicked');
-        console.log(index);
+    constructor(props) {
+        super(props)
+        this.state = {
+            count: 0,
+            message: '',
+            completed: false
+        }
+        this.completedMessages = new Set();
+        this.started = false;
     }
 
-    return (
-        <h1 className={styles.title}>
-            Welcome to <a href="https://nextjs.org">Next.js!</a>
-            <p>{value}</p>
+    go() {
+        if (this.state.completed) return;
 
-            <button onClick={clickMe}>HELLO</button>
-        </h1>
-    )
+        this.started = !this.started;
+        if (this.started) {
+            this.messageIndex = 0;
+            this._generateMessages();
+        } else {
+            this._stopMessages();
+        }
+    }
+
+    _generateMessages() {
+        this.timer = setInterval(() => {
+            this.setState({ message:  `${questions[this.messageIndex]}....`});
+
+            if (this.messageIndex < questions.length - 1) {
+                this.messageIndex += 1;
+            } else {
+                this.messageIndex = 0;
+            }
+        }, interval);
+    }
+
+    _stopMessages() {
+        const item = Math.floor(Math.random() * questions.length);
+        if (this.completedMessages.size === questions.length) {
+            this.completedMessages = new Set(null);
+            this.setState({ completed: true});
+            return;
+        }
+
+        if (this.completedMessages.has(item)) {
+            this._stopMessages();
+        } else {
+            clearInterval(this.timer);
+            this.setState({ message:  `${questions[item]}....`});
+            this.completedMessages.add(item);
+        }
+    }
+
+    render() {
+        return (
+            <h1 className={styles.title}>
+                {(this.state.message === '' && (!this.state.completed)) &&
+                    <p className={styles.subtitle}>
+                        Click to start....
+                    </p>
+                }
+                {this.state.completed &&
+                    <p className={styles.subtitle}>
+                        Done!, refresh browser to start again
+                    </p>
+                }
+                {(!this.state.completed) &&
+                    <p className={styles.noselect}>
+                        {this.state.message}
+                    </p>
+                }
+            </h1>
+        );
+    }
 }
 
-export {Question};
+export { Question };

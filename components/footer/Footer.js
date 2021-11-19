@@ -1,18 +1,19 @@
 import styles from './Footer.module.css'
+import React from 'react';
 
-const Footer = () => {
-    return (
-        <footer className={styles.footer}>
-            <a
-                href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Powered by Richard van der Molen
-            </a>
-        </footer>
-    )
+class Footer extends React.Component {
+    render() {
+        return (
+            <footer className={styles.footer}>
+                <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Powered by Richard van der Molen
+                </a>
+            </footer>
+        )
+    }
 }
 
 export { Footer };
-
