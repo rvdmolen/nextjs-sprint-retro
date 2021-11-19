@@ -1,6 +1,6 @@
 import styles from './Navbar.module.css'
 
-export default function Navbar({ children, home }) {
+const Navbar = () => {
     return (
         <header className={styles.pageHeader}>
             <nav>
@@ -15,3 +15,4 @@ export default function Navbar({ children, home }) {
     )
 }
 
+export { Navbar };
