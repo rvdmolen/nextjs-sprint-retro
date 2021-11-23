@@ -15,9 +15,11 @@
 
 .pageHeader h1 {
     color: white;
+    font-weight: 500;
 }
 
 .pageHeader h2 {
     color: white;
     font-size: 1.2rem;
+    font-weight: normal;
 }
